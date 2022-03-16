@@ -11,4 +11,19 @@ describe('AnyApi routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('should create a song', async () => {
+    const results = await request(app).post('/api/v1/songs').send({
+      title: 'Welcome Home',
+      artist: 'Coheed and Cambira',
+      album: 'Good Apollo vol.1',
+    });
+
+    expect(results.body).toEqual({
+      id: expect.any(String),
+      title: 'Welcome Home',
+      artist: 'Coheed and Cambira',
+      album: 'Good Apollo vol.1',
+    });
+  });
 });
