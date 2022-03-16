@@ -14,6 +14,7 @@ describe('AnyApi routes', () => {
 
   it('should create a song', async () => {
     const results = await request(app).post('/api/v1/songs').send({
+      id: '1',
       title: 'Welcome Home',
       artist: 'Coheed and Cambira',
       album: 'Good Apollo vol.1',
