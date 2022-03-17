@@ -47,4 +47,52 @@ describe('AnyApi routes', () => {
       },
     ]);
   });
+
+  it('should get a song by id', async () => {
+    const song = await Song.create({
+      title: 'Dont Stop Believing',
+      artist: 'Journey',
+      album: 'Escape',
+    });
+
+    const res = await request(app).get(`/api/v1/songs/${song.id}`);
+
+    expect(res.body).toEqual(song);
+  });
+
+  it('should delete a song by Id', async () => {
+    const song = await Song.create({
+      title: 'Sunshine',
+      artist: 'Atmosphere',
+      album: 'Sad Clown Bad Year',
+    });
+    const res = await request(app).delete(`/api/v1/songs/${song.id}`);
+
+    expect(res.body).toEqual(song);
+    expect(await Song.getSongById(song.id)).toBeNull();
+  });
+
+  it('should update a song by Id', async () => {
+    const song = await Song.create({
+      title: 'What I Got',
+      artist: 'Sublime',
+      album: 'Sublime',
+    });
+
+    const res = await request(app).patch(`/api/v1/songs/${song.id}`).send({
+      title: 'Doin Time',
+      artist: 'Sublime',
+      album: 'Sublime',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'Doin Time',
+      artist: 'Sublime',
+      album: 'Sublime',
+    };
+
+    expect(res.body).toEqual(expected);
+    // expect(await Song.getSongById(song.id)).toEqual(expected);
+  });
 });
