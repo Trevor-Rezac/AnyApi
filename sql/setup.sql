@@ -9,9 +9,9 @@ CREATE TABLE songs (
   album TEXT NOT NULL
 );
 
-INSERT INTO
-  songs (title, artist, album)
-VALUES
-  ('Cant Stop', 'Red Hot Chili Peppers', 'By The Way'),
-  ('Welcome Home', 'Coheed and Cambria', 'Good Apollo vol.1');
+-- INSERT INTO
+--   songs (title, artist, album)
+-- VALUES
+--   ('Cant Stop', 'Red Hot Chili Peppers', 'By The Way'),
+--   ('Welcome Home', 'Coheed and Cambria', 'Good Apollo vol.1');
   
