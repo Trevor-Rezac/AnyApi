@@ -59,4 +59,16 @@ describe('AnyApi routes', () => {
 
     expect(res.body).toEqual(song);
   });
+
+  it('should delete a song by Id', async () => {
+    const song = await Song.create({
+      title: 'Sunshine',
+      artist: 'Atmosphere',
+      album: 'Sad Clown Bad Year',
+    });
+    const res = await request(app).delete(`/api/v1/songs/${song.id}`);
+
+    expect(res.body).toEqual(song);
+    expect(await Song.getSongById(song.id)).toBeNull();
+  });
 });
