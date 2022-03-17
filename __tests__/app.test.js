@@ -71,4 +71,28 @@ describe('AnyApi routes', () => {
     expect(res.body).toEqual(song);
     expect(await Song.getSongById(song.id)).toBeNull();
   });
+
+  it('should update a song by Id', async () => {
+    const song = await Song.create({
+      title: 'What I Got',
+      artist: 'Sublime',
+      album: 'Sublime',
+    });
+
+    const res = await request(app).patch(`/api/v1/songs/${song.id}`).send({
+      title: 'Doin Time',
+      artist: 'Sublime',
+      album: 'Sublime',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'Doin Time',
+      artist: 'Sublime',
+      album: 'Sublime',
+    };
+
+    expect(res.body).toEqual(expected);
+    // expect(await Song.getSongById(song.id)).toEqual(expected);
+  });
 });
