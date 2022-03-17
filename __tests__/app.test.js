@@ -47,4 +47,16 @@ describe('AnyApi routes', () => {
       },
     ]);
   });
+
+  it('should get a song by id', async () => {
+    const song = await Song.create({
+      title: 'Dont Stop Believing',
+      artist: 'Journey',
+      album: 'Escape',
+    });
+
+    const res = await request(app).get(`/api/v1/songs/${song.id}`);
+
+    expect(res.body).toEqual(song);
+  });
 });
